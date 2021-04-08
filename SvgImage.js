@@ -37,14 +37,16 @@ class SvgImage extends Component {
   componentDidMount() {
     this.doFetch(this.props);
   }
+
   componentDidUpdate(prevProps) {
-    const prevUri = prevProps.source && prevProps.source.uri;
-    const nextUri = this.props.source && this.props.source.uri;
+    const prevUri = prevProps.source && prevProps.source.uri
+    const nextUri = this.props.source && this.props.source.uri;;
 
     if (nextUri && prevUri !== nextUri) {
       this.doFetch(this.props);
     }
   }
+
   doFetch = async props => {
     let uri = props.source && props.source.uri;
     if (uri) {
@@ -72,32 +74,32 @@ class SvgImage extends Component {
       const html = getHTML(svgContent, flattenedStyle);
 
       return (
-        <View pointerEvents="none" style={[props.style, props.containerStyle]}>
-          <WebView
-            originWhitelist={['*']}
-            scalesPageToFit={true}
-            useWebKit={false}
-            style={[
-              {
-                width: 200,
-                height: 100,
-                backgroundColor: 'transparent',
-              },
-              props.style,
-            ]}
-            scrollEnabled={false}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            source={{ html }}
-          />
-        </View>
+          <View pointerEvents="none" style={[props.style, props.containerStyle]}>
+            <WebView
+                originWhitelist={['*']}
+                scalesPageToFit={true}
+                useWebKit={false}
+                style={[
+                  {
+                    width: 200,
+                    height: 100,
+                    backgroundColor: 'transparent',
+                  },
+                  props.style,
+                ]}
+                scrollEnabled={false}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                source={{ html }}
+            />
+          </View>
       );
     } else {
       return (
-        <View
-          pointerEvents="none"
-          style={[props.containerStyle, props.style]}
-        />
+          <View
+              pointerEvents="none"
+              style={[props.containerStyle, props.style]}
+          />
       );
     }
   }
